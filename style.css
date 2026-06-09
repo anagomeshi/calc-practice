@@ -159,36 +159,15 @@ html,body {
   grid-row: 2 / 5;
 }
 
-.zero-button{
-  grid-column: 1 / 4;
+.enter-button{
+  grid-column: 2 / 4;
   grid-row: 4;
 }
 
-/*  エンター */
-.enter{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  max-width: 560px;
-  box-sizing: border-box;
-}
-
-.enter button{
+.enter-button button{
   display: none;
-  width: 100%;
-  height: 60px;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  font-size: 1.25rem;
-  line-height: 1.5rem;
   color: #fff;
   background-color: #5a7bc0;
-  cursor: pointer;
-  box-sizing: border-box;
 }
 
 .enter button.show{
