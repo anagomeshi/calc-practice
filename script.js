@@ -47,7 +47,7 @@ function answer(){
         document.querySelector('.actual-answer').textContent = ans;
     }
 
-    document.querySelectorAll(".numpad button:not(.)").forEach(button => {
+    document.querySelectorAll(".numpad button").forEach(button => {
         if (!button.classList.contains('answer-button') && !button.classList.contains('next-button')) button.disabled = true;
     });
 
@@ -64,7 +64,7 @@ function next(){
     document.querySelector('.comments').querySelector(".show").classList.remove("show");
 
     document.querySelectorAll(".numpad button").forEach(button => {
-        button.disabled = false;
+        if (!button.classList.contains('answer-button') && !button.classList.contains('next-button')) button.disabled = false;
     });
 
     document.querySelector('.next-button').classList.remove("show");
