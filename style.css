@@ -32,40 +32,6 @@ html,body {
   box-sizing: border-box;
 }
 
-/* ヘッダー */
-.app-header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 32px;
-  box-sizing: border-box;
-}
-
-.app-header button{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.app-header img{
-  width: 1.75rem;
-}
-
-.app-header span{
-  font-size: 1.25rem;
-  line-height: 1.5rem;
-  margin-left: 0.5rem;
-}
-
 /* 問題 */
 .question{
   display: flex;
@@ -172,4 +138,6 @@ html,body {
 
 .enter-button button.show{
   display: flex !important;
+  width: 100%;
+  height: 100%;
 }
