@@ -47,8 +47,8 @@ function answer(){
         document.querySelector('.actual-answer').textContent = ans;
     }
 
-    document.querySelectorAll(".numpad button").forEach(button => {
-        button.disabled = true;
+    document.querySelectorAll(".numpad button:not(.)").forEach(button => {
+        if (!button.classList.contains('answer-button') && !button.classList.contains('next-button')) button.disabled = true;
     });
 
     document.querySelector('.answer-button').classList.remove("show");
