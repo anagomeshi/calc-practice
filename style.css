@@ -170,7 +170,7 @@ html,body {
   background-color: #5a7bc0;
 }
 
-.enter button.show{
+.enter-button button.show{
   display: flex;
   justify-content: center;
   align-items: center;
