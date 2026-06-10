@@ -42,7 +42,7 @@ function clearDisplayInput(){
 function enter(){
     answer();
 
-    setTimeout(next(), 2000);
+    setTimeout(next, 2000);
 }
 
 function answer(){
