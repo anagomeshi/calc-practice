@@ -129,4 +129,5 @@ html,body {
   grid-column: 2 / 4;
   grid-row: 4;
   background-color: #5a7bc0 !important;
+  color: #ffffff !important;
 }
