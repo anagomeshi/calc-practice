@@ -54,7 +54,7 @@ function answer(){
     }
 
     document.querySelectorAll(".numpad button").forEach(button => {
-        if (!button.classList.contains('enter-button')) button.disabled = true;
+        button.disabled = true;
     });
 }
 
@@ -67,7 +67,7 @@ function next(){
     document.querySelector('.comments').querySelector(".show").classList.remove("show");
 
     document.querySelectorAll(".numpad button").forEach(button => {
-        if (!button.classList.contains('enter-button')) button.disabled = false;
+        button.disabled = false;
     });
 }
 
