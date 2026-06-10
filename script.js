@@ -39,6 +39,12 @@ function clearDisplayInput(){
     document.querySelector('.display-text').textContent = "";
 }
 
+function enter(){
+    answer();
+
+    setTimeout(next(), 150);
+}
+
 function answer(){
     if(Number(displayText) == ans){
         document.querySelector('.correct-comment').classList.add("show");
@@ -48,11 +54,8 @@ function answer(){
     }
 
     document.querySelectorAll(".numpad button").forEach(button => {
-        if (!button.classList.contains('answer-button') && !button.classList.contains('next-button')) button.disabled = true;
+        if (!button.classList.contains('enter-button')) button.disabled = true;
     });
-
-    document.querySelector('.answer-button').classList.remove("show");
-    document.querySelector('.next-button').classList.add("show");
 }
 
 function next(){
@@ -64,11 +67,8 @@ function next(){
     document.querySelector('.comments').querySelector(".show").classList.remove("show");
 
     document.querySelectorAll(".numpad button").forEach(button => {
-        if (!button.classList.contains('answer-button') && !button.classList.contains('next-button')) button.disabled = false;
+        if (!button.classList.contains('enter-button')) button.disabled = false;
     });
-
-    document.querySelector('.next-button').classList.remove("show");
-    document.querySelector('.answer-button').classList.add("show");
 }
 
 // 開始時に一度生成
