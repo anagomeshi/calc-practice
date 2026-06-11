@@ -4,6 +4,26 @@ let ans = 0;
 
 let displayText = "";
 
+window.addEventListener('keydown', (event) => {
+  // Enterキーの検知
+  if (event.key === 'Enter') {
+    enter();
+    return;
+  }
+
+  // Backspaceキーの検知
+  if (event.key === 'Backspace') {
+    deleteDisplayInput();
+    return;
+  }
+
+  // 正規表現を使って「0から9の1文字」であるかを判定
+  if (/^[0-9]$/.test(event.key)) {
+    displayInput(event.key);
+    return;
+  }
+});
+
 // 1~maxまでランダムな整数を生成
 function getRandomNumber(max) {
     return Math.floor(Math.random() * max) + 1;
@@ -42,14 +62,14 @@ function clearDisplayInput(){
 function enter(){
     answer();
 
-    setTimeout(next, 2000);
+    setTimeout(next, 1000);
 }
 
 function answer(){
     if(Number(displayText) == ans){
-        document.querySelector('.correct-comment').classList.add("show");
+        document.querySelector('.circle-img').classList.add("show");
     }else{
-        document.querySelector('.uncorrect-comment').classList.add("show");
+        document.querySelector('.cross-img').classList.add("show");
         document.querySelector('.actual-answer').textContent = ans;
     }
 
@@ -64,7 +84,8 @@ function next(){
     displayText = "";
     document.querySelector('.display-text').textContent = "";
 
-    document.querySelector('.comments').querySelector(".show").classList.remove("show");
+    document.querySelector('.display').querySelector(".show").classList.remove("show");
+    document.querySelector('.actual-answer').textContent = "";
 
     document.querySelectorAll(".numpad button").forEach(button => {
         button.disabled = false;
