@@ -23,13 +23,46 @@ html,body {
 
 /* クロム */
 .app-chrome{
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
     height: 100%;
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 1rem;
     box-sizing: border-box;
+}
+
+/* ヘッダー */
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 560px;
+    width: 100%;
+    height: 2rem;
+    box-sizing: border-box;
+}
+
+.header span{
+    font-size: 1.25rem;
+}
+
+.header button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.header img{
+    width: 2rem;
+    height: 2rem;
 }
 
 /* 問題 */
@@ -62,16 +95,16 @@ html,body {
 }
 
 .display img{
-    position:absolute;
-    left: calc(50% - 3.5rem);
     display: none;
-    width: 7rem;
-    height: 7rem;
-    margin: 0 !important;
 }
 
 .display img.show{
     display: block;
+    position: absolute;
+    left: calc(50% - 3.5rem);
+    width: 7rem;
+    height: 7rem;
+    margin: 0 !important;
 }
 
 /* コメント */
@@ -81,7 +114,7 @@ html,body {
     align-items: center;
     width: 100%;
     height: 2.5rem;
-    color: #ff0000;
+    color: #e55c6c;
     font-size: 2rem;
     line-height: 2rem;
     box-sizing: border-box;
@@ -102,12 +135,14 @@ html,body {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0;
     color: #325aaf;
     background-color: #eaeef4;
     font-size: 2.5rem;
     border: none;
     border-radius: 0.5rem;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .clear-button{
@@ -120,4 +155,87 @@ html,body {
     grid-row: 4;
     background-color: #5a7bc0 !important;
     color: #ffffff !important;
+}
+
+/* 設定 */
+.settings{
+    display: none;
+}
+
+.settings.show{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: rgba(0,0,0,.7);
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.settings-contents{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 560px;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.settings-contents span{
+    font-size: 1.25rem;
+}
+
+.settings-contents div{
+    display: flex;
+    justify-content: center;
+}
+
+.settings-contents input{
+    display: none;
+}
+
+.settings-contents label{
+    float: left;
+    padding: 0.5rem 1rem;
+    margin: 0; 
+    border: 1px solid #c7cdd5;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.settings-contents label:first-of-type{
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.settings-contents label:last-of-type{
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.settings-contents input[type="radio"]:checked + label {
+    background-color: #e2ebf3;
+    color: #325aaf;
+}
+
+.settings-contents button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    padding: 0 4rem;
+    color: #ffffff;
+    background-color: #5a7bc0;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
 }
