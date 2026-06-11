@@ -9,52 +9,46 @@
 </head>
 
 <body>
-  <div class="app-chrome">
+    <div class="app-chrome">
     <div class="question">
-      <span class="first-number">12</span>
-      <span class="sign">×</span>
-      <span class="second-number">47</span>
+        <span class="first-number">12</span>
+        <span class="sign">×</span>
+        <span class="second-number">47</span>
     </div>
     <div class="display">
-      <span class="display-text"></span>
+        <img class="circle-img" src="img/circle.svg" alt="">
+        <img class="cross-img" src="img/cross.svg" alt="">
+        <span class="display-text"></span>
     </div>
-    <div class="comments">
-      <div class="correct-comment">
-        <span>正解！</span>
-      </div>
-      <div class="uncorrect-comment">
-        <span>不正解</span>
-        <span class="actual-answer"></span>
-      </div>
-    </div>
+    <div class="actual-answer"></div>
     <div class="numpad">
-      <button onclick="displayInput('7')">7</button>
-      <button onclick="displayInput('8')">8</button>
-      <button onclick="displayInput('9')">9</button>
-      <button onclick="deleteDisplayInput()">←</button>
-      <button onclick="displayInput('4')">4</button>
-      <button onclick="displayInput('5')">5</button>
-      <button onclick="displayInput('6')">6</button>
-      <button class="clear-button" onclick="clearDisplayInput()">C</button>
-      <button onclick="displayInput('1')">1</button>
-      <button onclick="displayInput('2')">2</button>
-      <button onclick="displayInput('3')">3</button>
-      <button class="zero-button" onclick="displayInput('0')">0</button>
-      <button class="enter-button" onclick="enter()">Enter</button>
+        <button onclick="displayInput('7')">7</button>
+        <button onclick="displayInput('8')">8</button>
+        <button onclick="displayInput('9')">9</button>
+        <button onclick="deleteDisplayInput()">←</button>
+        <button onclick="displayInput('4')">4</button>
+        <button onclick="displayInput('5')">5</button>
+        <button onclick="displayInput('6')">6</button>
+        <button class="clear-button" onclick="clearDisplayInput()">C</button>
+        <button onclick="displayInput('1')">1</button>
+        <button onclick="displayInput('2')">2</button>
+        <button onclick="displayInput('3')">3</button>
+        <button class="zero-button" onclick="displayInput('0')">0</button>
+        <button class="enter-button" onclick="enter()">Enter</button>
     </div>
-  </div>
-  <script type="text/javascript" src="script.js"></script>
-  <!-- <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('sw.js').then(function(registration) {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }, function(err) {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-      });
-    }
-  </script> -->
+    </div>
+    <script type="text/javascript" src="script.js"></script>
+    <!-- <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+            navigator.serviceWorker.register('sw.js').then(function(registration) {
+                console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+            });
+        }
+    </script> -->
 </body>
 
 </html>
