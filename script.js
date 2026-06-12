@@ -39,7 +39,7 @@ function changeSettings(){
 }
 
 function toggleSettingsView(){
-    isKeyInputAccepted = !inKeyInputAccepted;
+    isKeyInputAccepted = !isKeyInputAccepted;
     isSettingsShow = !isSettingsShow;
 
     if(isSettingsShow){
@@ -121,7 +121,7 @@ function clearDisplayInput(){
 }
 
 function enter(){
-    isKeyInputAccepted = !inKeyInputAccepted;
+    isKeyInputAccepted = !isKeyInputAccepted;
     answer();
 
     setTimeout(next, 1000);
@@ -153,7 +153,7 @@ function next(){
         button.disabled = false;
     });
 
-    isKeyInputAccepted = !inKeyInputAccepted;
+    isKeyInputAccepted = !isKeyInputAccepted;
 }
 
 
