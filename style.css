@@ -21,11 +21,9 @@ html,body {
     }
 }
 
-/* クロム */
 .app-chrome{
     position: relative;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     height: 100%;
@@ -33,7 +31,6 @@ html,body {
     box-sizing: border-box;
 }
 
-/* ヘッダー */
 .header{
     display: flex;
     justify-content: space-between;
@@ -41,6 +38,7 @@ html,body {
     max-width: 560px;
     width: 100%;
     height: 2rem;
+    margin-bottom: 2rem;
     box-sizing: border-box;
 }
 
@@ -65,99 +63,64 @@ html,body {
     height: 2rem;
 }
 
-/* 問題 */
 .question{
     display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+    box-sizing: border-box;
+}
+
+.formula{
+    display: flex;
     justify-content: center;
-    flex-direction: row;
     width: 100%;
     gap: 1rem;
     box-sizing: border-box;
 }
 
-.question span{
+.formula span{
     font-size: 3.5rem;
 }
 
-/* ディスプレイ */
-.display{
-    position: relative;
+.answer-box{
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 560px;
     height: 4rem;
-    font-size: 2.5rem;
     border: 1px solid #344861;
     border-radius: 0.5rem;
-    box-sizing: border-box;
-}
-
-.display img{
-    display: none;
-}
-
-.display img.show{
-    display: block;
-    position: absolute;
-    left: calc(50% - 3.5rem);
-    width: 7rem;
-    height: 7rem;
-    margin: 0 !important;
-}
-
-/* コメント */
-.actual-answer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 2.5rem;
     color: #e55c6c;
-    font-size: 2rem;
-    line-height: 2rem;
+    font-size: 2.5rem;
     box-sizing: border-box;
 }
 
-/* numpad */
-.numpad{
-    display: grid;
+.spacing{
     width: 100%;
-    max-width: 560px;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 80px 80px 80px 80px;
+    min-height: 2rem;
+    height: 100%;
     box-sizing: border-box;
 }
 
-.numpad button{
+.show-answer-button{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    color: #325aaf;
-    background-color: #eaeef4;
-    font-size: 2.5rem;
+    height: 4rem;
+    padding: 0 2rem;
+    margin: 0;
     border: none;
     border-radius: 0.5rem;
+    color: #ffffff;
+    background-color: #5a7bc0;
+    font-size: 2rem;
     box-sizing: border-box;
     cursor: pointer;
 }
 
-.clear-button{
-    grid-column: 4;
-    grid-row: 2 / 5;
-}
-
-.enter-button{
-    grid-column: 2 / 4;
-    grid-row: 4;
-    background-color: #5a7bc0 !important;
-    color: #ffffff !important;
-}
-
-/* 設定 */
 .settings{
     display: none;
 }
@@ -199,7 +162,7 @@ html,body {
     justify-content: center;
 }
 
-.settings-contents input{
+.settings-contents input[type="radio"]{
     display: none;
 }
 
@@ -229,8 +192,7 @@ html,body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3rem;
-    padding: 0 4rem;
+    padding: 0.5rem 2rem;
     color: #ffffff;
     background-color: #5a7bc0;
     font-size: 1.5rem;
