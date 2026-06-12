@@ -6,8 +6,6 @@ let firstNumberDigits = 2;
 let secondNumberDigits = 2;
 let signType = "multiplication";
 
-let displayText = "";
-
 let isKeyInputAccepted = true;
 let isSettingsShow = false;
 
@@ -49,25 +47,13 @@ function toggleSettingsView(){
     }
     
     isKeyInputAccepted = !isKeyInputAccepted;
+    console.log(isKeyInputAccepted);
 }
 
 window.addEventListener('keydown', (event) => {
-    if(isKeyInputAccepted){
-        if (event.key === 'Enter') {
-            enter();
-            return;
-        }
-
-        if (event.key === 'Backspace') {
-            deleteDisplayInput();
-            return;
-        }
-
-        // 正規表現を使って「0から9の1文字」であるかを判定
-        if (/^[0-9]$/.test(event.key)) {
-            displayInput(event.key);
-            return;
-        }
+    if(isKeyInputAccepted && event.key === 'Enter'){
+        showAnswer();
+        return;
     }
 });
 
@@ -100,63 +86,23 @@ function generateQuestion(){
     }
 }
 
-function displayInput(number){
-    if (displayText === "" && number === "0") return;
-
-    // 文字列の末尾に数字を結合する
-    displayText += number;
-    
-    document.querySelector('.display-text').textContent = displayText;
-}
-
-function deleteDisplayInput(){
-    displayText = displayText.slice(0, -1);;
-
-    document.querySelector('.display-text').textContent = displayText;
-}
-
-function clearDisplayInput(){
-    displayText = "";
-
-    document.querySelector('.display-text').textContent = "";
-}
-
-function enter(){
+function showAnswer(){
     isKeyInputAccepted = !isKeyInputAccepted;
-    answer();
+    document.querySelector(".show-answer-button").disabled = true;
+
+    document.querySelector(".answer-box").textContent = ans;
 
     setTimeout(next, 1000);
-}
-
-function answer(){
-    if(Number(displayText) == ans){
-        document.querySelector('.circle-img').classList.add("show");
-    }else{
-        document.querySelector('.cross-img').classList.add("show");
-        document.querySelector('.actual-answer').textContent = ans;
-    }
-
-    document.querySelectorAll(".numpad button").forEach(button => {
-        button.disabled = true;
-    });
 }
 
 function next(){
     generateQuestion();
 
-    displayText = "";
-    document.querySelector('.display-text').textContent = "";
-
-    document.querySelector('.display').querySelector(".show").classList.remove("show");
-    document.querySelector('.actual-answer').textContent = "";
-
-    document.querySelectorAll(".numpad button").forEach(button => {
-        button.disabled = false;
-    });
+    document.querySelector('.answer-box').textContent = "";
 
     isKeyInputAccepted = !isKeyInputAccepted;
+    document.querySelector(".show-answer-button").disabled = false;
 }
-
 
 changeSettings();
 
