@@ -39,6 +39,7 @@ function changeSettings(){
 }
 
 function toggleSettingsView(){
+    isKeyInputAccepted = !inKeyInputAccepted;
     isSettingsShow = !isSettingsShow;
 
     if(isSettingsShow){
