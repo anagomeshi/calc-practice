@@ -8,6 +8,7 @@ let signType = "multiplication";
 
 let displayText = "";
 
+let isKeyInputAccepted - true;
 let isSettingsShow = false;
 
 const radioButtons = document.querySelector(".settings-contents").querySelectorAll('input[type="radio"]');
@@ -49,20 +50,22 @@ function toggleSettingsView(){
 }
 
 window.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-        enter();
-        return;
-    }
+    if(isKeyInputAccepted){
+        if (event.key === 'Enter') {
+            enter();
+            return;
+        }
 
-    if (event.key === 'Backspace') {
-        deleteDisplayInput();
-        return;
-    }
+        if (event.key === 'Backspace') {
+            deleteDisplayInput();
+            return;
+        }
 
-    // 正規表現を使って「0から9の1文字」であるかを判定
-    if (/^[0-9]$/.test(event.key)) {
-        displayInput(event.key);
-        return;
+        // 正規表現を使って「0から9の1文字」であるかを判定
+        if (/^[0-9]$/.test(event.key)) {
+            displayInput(event.key);
+            return;
+        }
     }
 });
 
@@ -117,6 +120,7 @@ function clearDisplayInput(){
 }
 
 function enter(){
+    isKeyInputAccepted = !inKeyInputAccepted;
     answer();
 
     setTimeout(next, 1000);
@@ -147,6 +151,8 @@ function next(){
     document.querySelectorAll(".numpad button").forEach(button => {
         button.disabled = false;
     });
+
+    isKeyInputAccepted = !inKeyInputAccepted;
 }
 
 
