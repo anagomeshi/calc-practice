@@ -39,7 +39,6 @@ function changeSettings(){
 }
 
 function toggleSettingsView(){
-    isKeyInputAccepted = !isKeyInputAccepted;
     isSettingsShow = !isSettingsShow;
 
     if(isSettingsShow){
@@ -48,6 +47,8 @@ function toggleSettingsView(){
         generateQuestion();
         document.querySelector(".settings").classList.remove("show")
     }
+    
+    isKeyInputAccepted = !isKeyInputAccepted;
 }
 
 window.addEventListener('keydown', (event) => {
