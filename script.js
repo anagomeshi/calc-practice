@@ -8,7 +8,7 @@ let signType = "multiplication";
 
 let displayText = "";
 
-let isKeyInputAccepted - true;
+let isKeyInputAccepted = true;
 let isSettingsShow = false;
 
 const radioButtons = document.querySelector(".settings-contents").querySelectorAll('input[type="radio"]');
