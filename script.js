@@ -1,109 +1,177 @@
 let firstNumber = 0;
 let secondNumber = 0;
 let ans = 0;
+let currentScore = 0;
 
-let firstNumberDigits = 2;
-let secondNumberDigits = 2;
-let signType = "multiplication";
+let displayText = "";
 
-let isKeyInputAccepted = true;
-let isSettingsShow = false;
+let isKeyInputAccepted = false;
 
-const radioButtons = document.querySelector(".settings-contents").querySelectorAll('input[type="radio"]');
+function startGame(){
+    document.querySelector(".title-page").classList.remove("page-show");
+    document.querySelector(".count-page").classList.add("page-show");
+    startCount();
+}
 
-radioButtons.forEach(radio => {
-    radio.addEventListener('change', changeSettings);
-});
+function startCount(){
+    let count = 3;
 
-function changeSettings(){
-    const firstNumberDigitsValue = document.querySelector('input[name="first-number-digits"]:checked')?.value;
-    const secondNumberDigitsValue = document.querySelector('input[name="second-number-digits"]:checked')?.value;
-    const signTypeValue = document.querySelector('input[name="sign-type"]:checked')?.value;
-    let signTypeText = "";
+    document.querySelector(".count-page span").textContent = count;
 
-    if (firstNumberDigitsValue && secondNumberDigitsValue && signTypeValue) {
-        firstNumberDigits = firstNumberDigitsValue;
-        secondNumberDigits = secondNumberDigitsValue;
-        signType = signTypeValue;
+    const countdown = setInterval(() => {
+        count--;
 
-        if(signType == "addition"){
-            signTypeText = "足し算";
-        }else if(signType== "multiplication"){
-            signTypeText = "掛け算";
+        if (count > 0) {
+            document.querySelector(".count-page span").textContent = count;
+        } else {
+            clearInterval(countdown);
+
+            // ゲーム開始の処理
+            generateQuestion();
+
+            document.querySelector(".count-page").classList.remove("page-show");
+            document.querySelector(".game-page").classList.add("page-show");
+
+            isKeyInputAccepted = true;
+
+            gameTimer();
+
+            document.querySelector(".current-score").textContent = "Score 0";
+        }
+    }, 1000);
+}
+
+window.addEventListener("keydown", (event) => {
+    if(isKeyInputAccepted){
+        // Enterキーの検知
+        if (event.key === "Enter"){
+            enter();
+            return;
         }
 
-        document.querySelector(".settings-contents span").textContent = `${firstNumberDigits}桁 と ${secondNumberDigits}桁の ${signTypeText}`;
-    }
-}
+        // Backspaceキーの検知
+        if (event.key === "Backspace"){
+            deleteDisplayInput();
+            return;
+        }
 
-function toggleSettingsView(){
-    isSettingsShow = !isSettingsShow;
-
-    if(isSettingsShow){
-        document.querySelector(".settings").classList.add("show");
-    }else{
-        generateQuestion();
-        document.querySelector(".settings").classList.remove("show")
-    }
-    
-    isKeyInputAccepted = !isKeyInputAccepted;
-    console.log(isKeyInputAccepted);
-}
-
-window.addEventListener('keydown', (event) => {
-    if(isKeyInputAccepted && event.key === 'Enter'){
-        showAnswer();
-        return;
+        // 正規表現を使って「0から9の1文字」であるかを判定
+        if (/^[0-9]$/.test(event.key)){
+            displayInput(event.key);
+            return;
+        }
     }
 });
 
-// 桁数に応じたランダムな整数を生成
-function getRandomNumber(digits) {
-    const min = Math.pow(10, digits - 1); 
-    
-    const max = Math.pow(10, digits) - 1; 
-    
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function gameTimer(){
+    let count = 90;
+
+    document.querySelector(".timer").textContent = `Timer ${count}`;
+
+    const countdown = setInterval(() => {
+        count--;
+
+        if (count > 0) {
+            document.querySelector(".timer").textContent = `Timer ${count}`;
+        } else {
+            clearInterval(countdown);
+
+            document.querySelector(".game-page").classList.remove("page-show");
+            document.querySelector(".result-page").classList.add("page-show");
+            
+            document.querySelector(".result-page span").textContent = currentScore;
+        }
+    }, 1000);
+}
+
+function updateCurrentScore(isCorrect){
+    // 答えとなる数字の平方根を取り、小数点以下を切り捨て、それを10倍したものを獲得できるスコアとする
+    const score = Math.floor(Math.sqrt(ans)) * 10;
+
+    if(isCorrect) currentScore += score;
+    else currentScore -= score;
+
+    if(currentScore < 0) currentScore = 0;
+
+    document.querySelector(".current-score").textContent = `Score ${currentScore}`;
+}
+
+// 1~maxまでランダムな整数を生成
+function getRandomNumber(max){
+    return Math.floor(Math.random() * max) + 1;
 }
 
 function generateQuestion(){
-    firstNumber = getRandomNumber(firstNumberDigits);
-    secondNumber = getRandomNumber(secondNumberDigits);
-
-    if(signType == "addition"){
-        ans = firstNumber + secondNumber;
-    }else if(signType == "multiplication"){
-        ans = firstNumber * secondNumber;
-    }
+    firstNumber = getRandomNumber(99);
+    secondNumber = getRandomNumber(99);
+    ans = firstNumber * secondNumber;
 
     document.querySelector('.first-number').textContent = firstNumber;
     document.querySelector('.second-number').textContent = secondNumber;
-    
-    if(signType == "addition"){
-        document.querySelector(".sign").textContent = "+";
-    }else if(signType == "multiplication"){
-        document.querySelector(".sign").textContent = "×";
-    }
 }
 
-function showAnswer(){
-    isKeyInputAccepted = !isKeyInputAccepted;
-    document.querySelector(".show-answer-button").disabled = true;
+function displayInput(number){
+    if (displayText === "" && number === "0") return;
 
-    document.querySelector(".answer-box").textContent = ans;
+    // 文字列の末尾に数字を結合する
+    displayText += number;
+    
+    document.querySelector('.display-text').textContent = displayText;
+}
 
-    setTimeout(next, 1000);
+function deleteDisplayInput(){
+    displayText = displayText.slice(0, -1);;
+
+    document.querySelector('.display-text').textContent = displayText;
+}
+
+function clearDisplayInput(){
+    displayText = "";
+
+    document.querySelector('.display-text').textContent = "";
+}
+
+function enter(){
+    answer();
+    setTimeout(next, 500);
+}
+
+function answer(){
+    isKeyInputAccepted = false;
+
+    document.querySelectorAll(".numpad button").forEach(button => {
+        button.disabled = true;
+    });
+
+    if(Number(displayText) == ans){
+        updateCurrentScore(true);
+
+        document.querySelector('.circle-img').classList.add("show");
+    }else{
+        updateCurrentScore(false);
+
+        document.querySelector('.cross-img').classList.add("show");
+        document.querySelector('.actual-answer').textContent = ans;
+    }
 }
 
 function next(){
     generateQuestion();
 
-    document.querySelector('.answer-box').textContent = "";
+    displayText = "";
+    document.querySelector('.display-text').textContent = "";
 
-    isKeyInputAccepted = !isKeyInputAccepted;
-    document.querySelector(".show-answer-button").disabled = false;
+    document.querySelector('.display').querySelector(".show").classList.remove("show");
+    document.querySelector('.actual-answer').textContent = "";
+
+    isKeyInputAccepted = true;
+
+    document.querySelectorAll(".numpad button").forEach(button => {
+        button.disabled = false;
+    });
 }
 
-changeSettings();
-
-generateQuestion();
+function returnTitle(){
+    document.querySelector(".result-page").classList.remove("page-show");
+    document.querySelector(".title-page").classList.add("page-show");
+}
