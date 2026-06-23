@@ -22,12 +22,69 @@ html,body {
 }
 
 .app-chrome{
-    position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    width: 100%;
     height: 100%;
     padding: 1rem;
+    box-sizing: border-box;
+}
+
+.page-show{
+    display: flex !important;
+}
+
+.title-page{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 10rem 0;
+    box-sizing: border-box;
+}
+
+.title-page span{
+    max-width: 560px;
+    font-size: 3.5rem;
+}
+
+.title-page button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 560px;
+    height: 80px;
+    padding: 2rem;
+    background-color: #5a7bc0;
+    color: #ffffff;
+    font-size: 2.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.count-page{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.count-page span{
+    color: #225aaf;
+    font-size: 7rem;
+}
+
+.game-page{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
 }
 
@@ -37,13 +94,12 @@ html,body {
     align-items: center;
     max-width: 560px;
     width: 100%;
-    height: 2rem;
-    margin-bottom: 2rem;
     box-sizing: border-box;
 }
 
 .header span{
-    font-size: 1.25rem;
+    font-size: 2rem;
+    color: #6e7c8c;
 }
 
 .header button{
@@ -65,137 +121,119 @@ html,body {
 
 .question{
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    gap: 2rem;
-    box-sizing: border-box;
-}
-
-.formula{
-    display: flex;
     justify-content: center;
+    flex-direction: row;
+    max-width: 560px;
     width: 100%;
     gap: 1rem;
     box-sizing: border-box;
 }
 
-.formula span{
+.question span{
     font-size: 3.5rem;
 }
 
-.answer-box{
+.display{
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     max-width: 560px;
+    width: 100%;
     height: 4rem;
     border: 1px solid #344861;
     border-radius: 0.5rem;
-    color: #e55c6c;
     font-size: 2.5rem;
     box-sizing: border-box;
 }
 
-.spacing{
-    width: 100%;
-    min-height: 2rem;
-    height: 100%;
-    box-sizing: border-box;
-}
-
-.show-answer-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 4rem;
-    padding: 0 2rem;
-    margin: 0;
-    border: none;
-    border-radius: 0.5rem;
-    color: #ffffff;
-    background-color: #5a7bc0;
-    font-size: 2rem;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.settings{
+.display img{
+    position:absolute;
+    left: calc(50% - 3.5rem);
     display: none;
+    width: 7rem;
+    height: 7rem;
+    margin: 0 !important;
 }
 
-.settings.show{
+.display img.show{
+    display: block;
+}
+
+.actual-answer{
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    background-color: rgba(0,0,0,.7);
-    box-sizing: border-box;
-    z-index: 2;
-}
-
-.settings-contents{
-    display: flex;
-    flex-direction: column;
     align-items: center;
     max-width: 560px;
     width: 100%;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    background-color: #ffffff;
+    height: 2.5rem;
+    color: #e55c6c;
+    font-size: 2rem;
+    line-height: 2rem;
     box-sizing: border-box;
 }
 
-.settings-contents span{
-    font-size: 1.25rem;
+.numpad{
+    display: grid;
+    max-width: 560px;
+    width: 100%;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 80px 80px 80px 80px;
+    box-sizing: border-box;
 }
 
-.settings-contents div{
-    display: flex;
-    justify-content: center;
-}
-
-.settings-contents input[type="radio"]{
-    display: none;
-}
-
-.settings-contents label{
-    float: left;
-    padding: 0.5rem 1rem;
-    margin: 0; 
-    border: 1px solid #c7cdd5;
-    font-size: 1.25rem;
-    cursor: pointer;
-}
-
-.settings-contents label:first-of-type{
-    border-radius: 0.5rem 0 0 0.5rem;
-}
-
-.settings-contents label:last-of-type{
-    border-radius: 0 0.5rem 0.5rem 0;
-}
-
-.settings-contents input[type="radio"]:checked + label {
-    background-color: #e2ebf3;
-    color: #325aaf;
-}
-
-.settings-contents button{
+.numpad button{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0.5rem 2rem;
-    color: #ffffff;
+    color: #325aaf;
+    background-color: #eaeef4;
+    font-size: 2.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.clear-button{
+    grid-column: 4;
+    grid-row: 2 / 5;
+}
+
+.enter-button{
+    grid-column: 2 / 4;
+    grid-row: 4;
+    background-color: #5a7bc0 !important;
+    color: #ffffff !important;
+}
+
+.result-page{
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 10rem 0;
+    box-sizing: border-box;
+}
+
+.result-page span{
+    max-width: 560px;
+    font-size: 3.5rem;
+}
+
+.result-page button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 560px;
+    height: 80px;
+    padding: 2rem;
     background-color: #5a7bc0;
-    font-size: 1.5rem;
+    color: #ffffff;
+    font-size: 2.5rem;
     border: none;
     border-radius: 0.5rem;
     box-sizing: border-box;
