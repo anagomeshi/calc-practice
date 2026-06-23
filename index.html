@@ -10,58 +10,49 @@
 
 <body>
     <div class="app-chrome">
-        <div class="header">
+        <div class="title-page page-show">
             <span>計算練習</span>
-            <button onclick="toggleSettingsView()">
-                <img src="img/gear.svg" alt="" draggable="false">
-            </button>
+            <button onclick="startGame()">スタート</button>
         </div>
-        <div class="question">
-            <div class="formula">
+        <div class="count-page">
+            <span></span>
+        </div>
+        <div class="game-page">
+            <div class="header">
+                <span class="timer"></span>
+                <span class="current-score"></span>
+            </div>
+            <div class="question">
                 <span class="first-number"></span>
-                <span class="sign"></span>
+                <span class="sign">×</span>
                 <span class="second-number"></span>
             </div>
-            <div ></div>
-            <div class="answer-box"></div>
-        </div>
-        <div class="spacing"></div>
-        <div>
-            <button class="show-answer-button" onclick="showAnswer()">答えを表示</button>
-        </div>
-        <div class="settings">
-            <div class="settings-contents">
-                <span>1桁 と 3桁の 足し算</span>
-                <div>
-                    <input type="radio" name="first-number-digits" value="1" id="first-number-1digits">
-                    <label for="first-number-1digits">1桁</label>
-                    <input type="radio" name="first-number-digits" value="2" id="first-number-2digits" checked>
-                    <label for="first-number-2digits">2桁</label>
-                    <input type="radio" name="first-number-digits" value="3" id="first-number-3digits">
-                    <label for="first-number-3digits">3桁</label>
-                    <input type="radio" name="first-number-digits" value="4" id="first-number-4digits">
-                    <label for="first-number-4digits">4桁</label>
-                </div>
-                <div>
-                    <input type="radio" name="second-number-digits" value="1" id="second-number-1digits">
-                    <label for="second-number-1digits">1桁</label>
-                    <input type="radio" name="second-number-digits" value="2" id="second-number-2digits" checked>
-                    <label for="second-number-2digits">2桁</label>
-                    <input type="radio" name="second-number-digits" value="3" id="second-number-3digits">
-                    <label for="second-number-3digits">3桁</label>
-                    <input type="radio" name="second-number-digits" value="4" id="second-number-4digits">
-                    <label for="second-number-4digits">4桁</label>
-                </div>
-                <div>
-                    <input type="radio" name="sign-type" value="addition" id="addition">
-                    <label for="addition">足し算</label>
-                    <input type="radio" name="sign-type" value="multiplication" id="multiplication" checked>
-                    <label for="multiplication">掛け算</label>
-                </div>
-                <button onclick="toggleSettingsView()">OK</button>
+            <div class="display">
+                <img class="circle-img" src="img/circle.svg" alt="">
+                <img class="cross-img" src="img/cross.svg" alt="">
+                <span class="display-text"></span>
+            </div>
+            <div class="actual-answer"></div>
+            <div class="numpad">
+                <button onclick="displayInput('7')">7</button>
+                <button onclick="displayInput('8')">8</button>
+                <button onclick="displayInput('9')">9</button>
+                <button onclick="deleteDisplayInput()">←</button>
+                <button onclick="displayInput('4')">4</button>
+                <button onclick="displayInput('5')">5</button>
+                <button onclick="displayInput('6')">6</button>
+                <button class="clear-button" onclick="clearDisplayInput()">C</button>
+                <button onclick="displayInput('1')">1</button>
+                <button onclick="displayInput('2')">2</button>
+                <button onclick="displayInput('3')">3</button>
+                <button class="zero-button" onclick="displayInput('0')">0</button>
+                <button class="enter-button" onclick="enter()">Enter</button>
             </div>
         </div>
-    </div>
+        <div class="result-page">
+            <span></span>
+            <button onclick="returnTitle()">タイトルに戻る</button>
+        </div>
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
