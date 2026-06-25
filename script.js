@@ -36,7 +36,11 @@ function startCount(){
 
             gameTimer();
 
+            currentScore = 0;
+            displayText = "";
+            
             document.querySelector(".current-score").textContent = "Score 0";
+            document.querySelector('.display-text').textContent = "";
         }
     }, 1000);
 }
