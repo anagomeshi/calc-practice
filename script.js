@@ -55,8 +55,6 @@ function startGame(){
 }
 
 function finishGame(){
-    localStorage.setItem('currentScore', 0);
-
     document.querySelector(".game-page").classList.remove("page-show");
     document.querySelector(".result-page").classList.add("page-show");
 
@@ -126,6 +124,8 @@ function answer(){
 
         setTimeout(next, 500);
     }else{
+        localStorage.setItem('currentScore', 0);
+
         document.querySelector('.cross-img').classList.add("show");
 
         document.querySelector('.actual-answer').textContent = ans;
