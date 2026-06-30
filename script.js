@@ -7,44 +7,6 @@ let displayText = "";
 
 let isKeyInputAccepted = false;
 
-function startGame(){
-    document.querySelector(".title-page").classList.remove("page-show");
-    document.querySelector(".count-page").classList.add("page-show");
-    startCount();
-}
-
-function startCount(){
-    let count = 3;
-
-    document.querySelector(".count-page span").textContent = count;
-
-    const countdown = setInterval(() => {
-        count--;
-
-        if (count > 0) {
-            document.querySelector(".count-page span").textContent = count;
-        } else {
-            clearInterval(countdown);
-
-            // ゲーム開始の処理
-            generateQuestion();
-
-            document.querySelector(".count-page").classList.remove("page-show");
-            document.querySelector(".game-page").classList.add("page-show");
-
-            isKeyInputAccepted = true;
-
-            gameTimer();
-
-            currentScore = 0;
-            displayText = "";
-            
-            document.querySelector(".current-score").textContent = "Score 0";
-            document.querySelector('.display-text').textContent = "";
-        }
-    }, 1000);
-}
-
 window.addEventListener("keydown", (event) => {
     if(isKeyInputAccepted){
         // Enterキーの検知
@@ -67,35 +29,46 @@ window.addEventListener("keydown", (event) => {
     }
 });
 
-function gameTimer(){
-    let count = 90;
+function startGame(){
+    generateQuestion();
 
-    document.querySelector(".timer").textContent = `Timer ${count}`;
+    if(localStorage.getItem('currentScore') != null){
+        currentScore = Number(localStorage.getItem('currentScore'));
+    }else{
+        localStorage.setItem('currentScore', 0);
+        currentScore = 0;
+    }
 
-    const countdown = setInterval(() => {
-        count--;
+    displayText = "";
 
-        if (count > 0) {
-            document.querySelector(".timer").textContent = `Timer ${count}`;
-        } else {
-            clearInterval(countdown);
+    document.querySelector(".title-page").classList.remove("page-show");
+    document.querySelector(".game-page").classList.add("page-show");
 
-            document.querySelector(".game-page").classList.remove("page-show");
-            document.querySelector(".result-page").classList.add("page-show");
-            
-            document.querySelector(".result-page span").textContent = currentScore;
-        }
-    }, 1000);
+    document.querySelector(".current-score").textContent = `Score ${currentScore}`;
+    document.querySelector('.display-text').textContent = "";
+
+    isKeyInputAccepted = true;
+
+    document.querySelectorAll(".numpad button").forEach(button => {
+        button.disabled = false;
+    });
 }
 
-function updateCurrentScore(isCorrect){
-    // 答えとなる数字の平方根を取り、小数点以下を切り捨て、それを10倍したものを獲得できるスコアとする
-    const score = Math.floor(Math.sqrt(ans)) * 10;
+function finishGame(){
+    localStorage.setItem('currentScore', 0);
 
-    if(isCorrect) currentScore += score;
-    else currentScore -= score;
+    document.querySelector(".game-page").classList.remove("page-show");
+    document.querySelector(".result-page").classList.add("page-show");
 
-    if(currentScore < 0) currentScore = 0;
+    document.querySelector('.display').querySelector(".show").classList.remove("show");
+    document.querySelector('.actual-answer').textContent = "";
+    
+    document.querySelector(".result-page span").textContent = currentScore;
+}
+
+function updateCurrentScore(){
+    currentScore += Math.floor(Math.sqrt(ans)) * 10;
+    localStorage.setItem('currentScore', currentScore);
 
     document.querySelector(".current-score").textContent = `Score ${currentScore}`;
 }
@@ -137,7 +110,6 @@ function clearDisplayInput(){
 
 function enter(){
     answer();
-    setTimeout(next, 500);
 }
 
 function answer(){
@@ -148,14 +120,17 @@ function answer(){
     });
 
     if(Number(displayText) == ans){
-        updateCurrentScore(true);
-
         document.querySelector('.circle-img').classList.add("show");
-    }else{
-        updateCurrentScore(false);
 
+        updateCurrentScore();
+
+        setTimeout(next, 500);
+    }else{
         document.querySelector('.cross-img').classList.add("show");
+
         document.querySelector('.actual-answer').textContent = ans;
+
+        setTimeout(finishGame, 1000);
     }
 }
 
@@ -163,10 +138,10 @@ function next(){
     generateQuestion();
 
     displayText = "";
+
     document.querySelector('.display-text').textContent = "";
 
     document.querySelector('.display').querySelector(".show").classList.remove("show");
-    document.querySelector('.actual-answer').textContent = "";
 
     isKeyInputAccepted = true;
 
