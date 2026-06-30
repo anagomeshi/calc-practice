@@ -1,6 +1,8 @@
 let firstNumber = 0;
 let secondNumber = 0;
 let ans = 0;
+
+let bestScore = 0;
 let currentScore = 0;
 
 let displayText = "";
@@ -39,12 +41,21 @@ function startGame(){
         currentScore = 0;
     }
 
+    if(localStorage.getItem('bestScore') != null){
+        bestScore = Number(localStorage.getItem('bestScore'));
+    }else{
+        localStorage.setItem('bestScore', 0);
+        bestScore = 0;
+    }
+
     displayText = "";
 
     document.querySelector(".title-page").classList.remove("page-show");
     document.querySelector(".game-page").classList.add("page-show");
 
     document.querySelector(".current-score").textContent = `Score ${currentScore}`;
+    document.querySelector('.best-score').textContent = `Best ${bestScore}`;
+
     document.querySelector('.display-text').textContent = "";
 
     isKeyInputAccepted = true;
@@ -66,7 +77,16 @@ function finishGame(){
 
 function updateCurrentScore(){
     currentScore += Math.floor(Math.sqrt(ans)) * 10;
+
     localStorage.setItem('currentScore', currentScore);
+
+    if(bestScore < currentScore){
+        bestScore = currentScore;
+        
+        localStorage.setItem('bestScore', bestScore);
+
+        document.querySelector(".best-score").textContent = `Best ${bestScore}`;
+    }
 
     document.querySelector(".current-score").textContent = `Score ${currentScore}`;
 }
