@@ -7,16 +7,30 @@ let currentScore = 0;
 
 let displayText = "";
 
+let displayState = 0; // 0:タイトル画面 1:ゲーム画面 2:リザルト画面
+
 let isKeyInputAccepted = false;
 
 window.addEventListener("keydown", (event) => {
-    if(isKeyInputAccepted){
-        // Enterキーの検知
-        if (event.key === "Enter"){
-            enter();
-            return;
+    // Enterキーの検知
+    if (event.key === "Enter"){
+        switch(displayState){
+            case 0:
+                startGame();
+                break;
+            case 1:
+                if(isKeyInputAccepted) answer();
+                break;
+            case 2:
+                returnTitle();
+                break;
+            default:
+                console.log("There is no display state.");
         }
+        return;
+    }
 
+    if(isKeyInputAccepted){
         // Backspaceキーの検知
         if (event.key === "Backspace"){
             deleteDisplayInput();
@@ -48,6 +62,8 @@ function startGame(){
         bestScore = 0;
     }
 
+    displayState = 1;
+
     displayText = "";
 
     document.querySelector(".title-page").classList.remove("page-show");
@@ -66,6 +82,8 @@ function startGame(){
 }
 
 function finishGame(){
+    displayState = 2;
+
     document.querySelector(".game-page").classList.remove("page-show");
     document.querySelector(".result-page").classList.add("page-show");
 
@@ -126,10 +144,6 @@ function clearDisplayInput(){
     document.querySelector('.display-text').textContent = "";
 }
 
-function enter(){
-    answer();
-}
-
 function answer(){
     isKeyInputAccepted = false;
 
@@ -171,6 +185,8 @@ function next(){
 }
 
 function returnTitle(){
+    displayState = 0;
+    
     document.querySelector(".result-page").classList.remove("page-show");
     document.querySelector(".title-page").classList.add("page-show");
 }
